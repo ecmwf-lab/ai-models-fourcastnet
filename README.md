@@ -1,6 +1,6 @@
 # ai-models-fourcastnet
 
-`ai-models-panguweather` is an `ai-models` plugin to run FourCastNet. See https://github.com/ecmwf-lab/ai-models for more information.
+`ai-models-fourcastnet` is an [ai-models](https://github.com/ecmwf-lab/ai-models) plugin to run [NVIDIA's FourCastNet](https://github.com/NVlabs/FourCastNet).
 
 FourCastNet: A Global Data-driven High-resolution Weather Model using Adaptive Fourier Neural Operators
 https://arxiv.org/abs/2202.11214
