@@ -15,7 +15,7 @@ import torch
 from ai_models.model import Model
 from climetlab.utils.humanize import seconds
 
-from .afnonet import AFNONet, PrecipNet, unlog_tp_torch
+from .afnonet import AFNONet, PrecipNet, unlog_tp_torch  # noqa
 
 LOG = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class FourCastNet(Model):
 
     def __init__(self, precip_flag=True, **kwargs):
         super().__init__(**kwargs)
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+
         self.precip_flag = precip_flag
         self.n_lat = 720
         self.n_lon = 1440
