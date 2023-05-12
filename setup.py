@@ -44,7 +44,7 @@ setuptools.setup(
     zip_safe=True,
     keywords="tool",
     entry_points={
-        "ai-models.model": [
+        "ai_models.model": [
             "fourcastnet = ai_models_fourcastnet.model:FourcastNet",
         ]
     },
