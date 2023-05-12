@@ -1,1 +1,13 @@
 # ai-models-fourcastnet
+
+`ai-models-panguweather` is an `ai-models` plugin to run FourCastNet. See https://github.com/ecmwf-lab/ai-models for more information.
+
+FourCastNet: A Global Data-driven High-resolution Weather Model using Adaptive Fourier Neural Operators
+https://arxiv.org/abs/2202.11214
+
+The FourCastNet code was developed by the authors of the preprint: Jaideep Pathak, Shashank Subramanian, Peter Harrington, Sanjeev Raja, Ashesh Chattopadhyay, Morteza Mardani, Thorsten Kurth, David Hall, Zongyi Li, Kamyar Azizzadenesheli, Pedram Hassanzadeh, Karthik Kashinath, Animashree Anandkumar.
+
+Version 0.1 of FourCastNet is used as default in ai-models.
+https://portal.nersc.gov/project/m4134/FCN_weights_v0.1/
+
+FourCastNet is released under **BSD 3-Clause License**, see LICENSE_fourcastnet for more details.
