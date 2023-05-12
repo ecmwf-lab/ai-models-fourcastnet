@@ -40,9 +40,14 @@ setuptools.setup(
     url="https://github.com/ecmwf-lab/ai-models-fourcastnet",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=['ai-models'],
+    install_requires=["ai-models"],
     zip_safe=True,
     keywords="tool",
+    entry_points={
+        "ai-models.model": [
+            "fourcastnet = ai_models_fourcastnet.model:FourcastNet",
+        ]
+    },
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
