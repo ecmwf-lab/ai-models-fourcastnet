@@ -32,7 +32,7 @@ assert version
 setuptools.setup(
     name="ai-models-fourcastnet",
     version=version,
-    description="A run ai weather models",
+    description="An ai-models plugin to run FourCastNet",
     long_description=read("README.md"),
     author="European Centre for Medium-Range Weather Forecasts (ECMWF)",
     author_email="software.support@ecmwf.int",
@@ -40,12 +40,18 @@ setuptools.setup(
     url="https://github.com/ecmwf-lab/ai-models-fourcastnet",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["ai-models"],
+    install_requires=[
+        "ai-models",
+        "torch==2.0.0",
+        "timm==0.6.13",
+        "einops==0.6.0",
+        "ruamel.yaml==0.17.21",
+    ],
     zip_safe=True,
     keywords="tool",
     entry_points={
         "ai_models.model": [
-            "fourcastnet = ai_models_fourcastnet.model:FourcastNet",
+            "fourcastnet = ai_models_fourcastnet.model:model",
         ]
     },
     classifiers=[
