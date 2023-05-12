@@ -8,12 +8,10 @@
 
 import logging
 import os
-import time
 
 import numpy as np
 import torch
 from ai_models.model import Model
-from climetlab.utils.humanize import seconds
 
 from .afnonet import AFNONet, PrecipNet, unlog_tp_torch  # noqa
 
@@ -158,12 +156,13 @@ class FourCastNet(Model):
         all_fields_numpy = self.normalise(all_fields_numpy)
 
         backbone_ckpt = os.path.join(self.assets, "backbone.ckpt")
-        LOG.debug("Loading %s", backbone_ckpt)
-        backbone_model = self.load_model(backbone_ckpt)
+        with self.timer(f"Loading {backbone_ckpt}"):
+            backbone_model = self.load_model(backbone_ckpt)
+
         if self.precip_flag:
             precip_ckpt = os.path.join(self.assets, "precip.ckpt")
-            LOG.debug("Loading %s", precip_ckpt)
-            precip_model = self.load_model(precip_ckpt, precip=True)
+            with self.timer(f"Loading {precip_ckpt}"):
+                precip_model = self.load_model(precip_ckpt, precip=True)
 
         # Run the inference session
         input_iter = torch.from_numpy(all_fields_numpy).to(self.device)
@@ -174,11 +173,10 @@ class FourCastNet(Model):
 
         sample_sfc = all_fields.sel(param="2t")[0]
 
-        LOG.info("Starting inference, lead time: %s", self.lead_time)
-        START_TIME = time.time()
-        with torch.no_grad():
+        torch.set_grad_enabled(False)
+
+        with self.stepper(6) as stepper:
             for i in range(self.lead_time // self.hour_steps):
-                LOG.info("Iteration %s, step=%sh", i, (i + 1) * self.hour_steps)
                 output = backbone_model(input_iter)
                 if self.precip_flag:
                     precip_output = precip_model(output[:, : self.precip_channels, ...])
@@ -241,12 +239,7 @@ class FourCastNet(Model):
                         edition=1,
                     )
 
-        elapsed = time.time() - START_TIME
-        LOG.info("Elapsed: %s", seconds(elapsed))
-        LOG.info(
-            "Average: %g seconds per step",
-            elapsed / (self.lead_time // self.hour_steps),
-        )
+                stepper(i, step)
 
 
 class FourCastNet0(FourCastNet):
