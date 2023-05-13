@@ -48,6 +48,7 @@ class FourCastNet(Model):
 
         self.backbone_channels = len(self.ordering)
 
+    def load_statistics(self):
         path = os.path.join(self.assets, "global_means.npy")
         LOG.info("Loading %s", path)
         self.means = np.load(path)
@@ -61,7 +62,6 @@ class FourCastNet(Model):
         self.stds = self.stds.astype(np.float32)
 
     def load_model(self, checkpoint_file, precip=False):
-        LOG.info("Loading %s", checkpoint_file)
         out_channels = 1 if precip else self.backbone_channels
         in_channels = 20 if precip else self.backbone_channels
 
@@ -72,6 +72,7 @@ class FourCastNet(Model):
 
         model.zero_grad()
         # Load weights
+
         checkpoint = torch.load(checkpoint_file, map_location=self.device)
 
         asset_dim = checkpoint["model_state"][
@@ -119,6 +120,8 @@ class FourCastNet(Model):
         )
 
     def run(self):
+        self.load_statistics()
+
         all_fields = self.all_fields
         all_fields = all_fields.sel(
             param_level=self.ordering, remapping={"param_level": "{param}{levelist}"}
@@ -235,8 +238,8 @@ class FourCastNet(Model):
                         check_nans=True,
                         template=sample_sfc,
                         step=step,
-                        paramId=228,
-                        edition=1,
+                        param="tp",
+                        stepType="accum",
                     )
 
                 stepper(i, step)
