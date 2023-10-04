@@ -1,5 +1,10 @@
 # ai-models-fourcastnet
 
+>
+> :warning: This plugin is now deprecated. Please use the newer version that can be found at https://github.com/ecmwf-lab/ai-models-fourcastnetv2
+> 
+
+
 `ai-models-fourcastnet` is an [ai-models](https://github.com/ecmwf-lab/ai-models) plugin to run [NVIDIA's FourCastNet](https://github.com/NVlabs/FourCastNet).
 
 FourCastNet: A Global Data-driven High-resolution Weather Model using Adaptive Fourier Neural Operators
