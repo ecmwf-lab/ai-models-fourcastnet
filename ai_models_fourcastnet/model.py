@@ -176,6 +176,11 @@ class FourCastNet(Model):
 
         sample_sfc = all_fields.sel(param="2t")[0]
 
+        if self.precip_flag:
+            self.write_input_fields(all_fields, ["tp"], sample_sfc)
+        else:
+            self.write_input_fields(all_fields)
+
         torch.set_grad_enabled(False)
 
         with self.stepper(6) as stepper:
