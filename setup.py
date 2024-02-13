@@ -42,7 +42,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=[
-        "ai-models>=0.3.6",
+        "ai-models>=0.4.0",
         "torch>=2.0.0",
         "timm>=0.6.13",
         "einops>=0.6.0",
