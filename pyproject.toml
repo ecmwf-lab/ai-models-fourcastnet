@@ -1,0 +1,11 @@
+[tool.isort]
+profile = "black"
+skip = "afnonet.py"
+
+[tool.flake8]
+max-line-length = 120
+exclude = ["afnonet.py"]
+extend-ignore = ["E203"]
+
+[tool.black]
+exclude = "afnonet.py"

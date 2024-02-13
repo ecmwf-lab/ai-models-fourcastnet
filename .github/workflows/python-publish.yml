@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: pip install black flake8 isort
+    - run: pip install black flake8 isort flake8-pyproject
     - run: black --version
     - run: isort --version
     - run: flake8 --version
